@@ -32,6 +32,7 @@ window.addEventListener("DOMContentLoaded", function(){
       let calcWidth = (window.innerWidth * 0.5) + 167;
       sidebox.style.left = calcWidth + 'px';
     }
+    
 
     if(matchMedia('screen and (max-width : 800px)').matches){
       for(let i=0; i<variableWidth.length; i++){
