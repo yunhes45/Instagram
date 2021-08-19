@@ -43,7 +43,7 @@
 	height: 22px;
 }
 
-.heart_btn.on .sprite_heart_icon_outline {
+.sprite_heart_icon_outline.on {
   background: url('../imgs/background01.png') no-repeat -26px -261px;
 }
 
@@ -80,6 +80,10 @@
 	background: url('../imgs/background01.png') no-repeat -237px -286px;
 	width: 19px;
 	height: 24px;
+}
+
+.sprite_bookmark_icon_outline.on {
+  background: url('../imgs/background01.png') no-repeat -159px -286px;  
 }
 
 .sprite_small_heart_icon_outline {
@@ -253,7 +257,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px; 20px;
+  padding: 10px 20px;
 }
 
 .contents .top .profile_img {
