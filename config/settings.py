@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'allauth.account',
     # user data
     'accounts',
+    # main pge
+    'post',
 
 
 ]
