@@ -112,7 +112,7 @@
 }
 
 .sprite_bookmark_icon_outline.on {
-  background: url('../imgs/background01.png') no-repeat -159px -286px;  
+  background: url('../imgs/background01.png') no-repeat -159px -286px;
 }
 
 .sprite_small_heart_icon_outline {
@@ -250,7 +250,7 @@ body {
 }
 
 #header .right_icons > div {
-
+  cursor: pointer;
 }
 
 /* main_container */

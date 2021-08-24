@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="{% static 'js/main.js' %}">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+<!--    {% block head %}-->
+<!--    {% endblock %}-->
+
 </head>
 <body>
 
@@ -21,7 +24,7 @@
       <section class="inner">
 
           <h1 class="logo">
-            <a href="index.html">
+            <a href="{% url 'post:post_list' %}">
               <div class="sprite_insta_logo"></div>
               <div class="sprite_write_logo"></div>
             </a>
@@ -37,7 +40,7 @@
           </div>
 
           <div class="right_icons">
-            <div class="sprite_camera_icon"><a href="#"></a></div>
+            <div class="sprite_camera_icon"><a href="{% url 'post:post_list' %}"></a></div>
             <div class="sprite_compass_icon"><a href="#"></a></div>
             <div class="sprite_heart_icon_outline"><a href="#"></a></div>
             <div class="sprite_user_icon_outline"><a href="#"></a></div>
