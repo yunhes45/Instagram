@@ -24,8 +24,44 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # post.like_set 으로 접근 가능
+    like_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='like_user_set', through='Like')
+
+    # post.bookmark_set 으로 접근 가능
+    bookmark_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='bookmark_user_set', through='Bookmark')
+
     class Meta:
         ordering = ["-created_at"]
 
+    @property
+    def like_count(self):
+        return self.like_user_set.count()
+
+    @property
+    def bookmark_count(self):
+        return self.bookmark_user_set.count()
+
     def __str__(self):
         return self.content
+
+class Like(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = [
+            ('user', 'post')
+        ]
+
+class BookMark(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = [
+            ('user', 'post')
+        ]
