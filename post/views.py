@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import get_user_model
-from .models import Post
+from .models import Post, Like, Comment
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 import json
@@ -114,3 +114,33 @@ def post_delete(request, pk):
         post.delete()
         messages.success(request, '삭제완료')
         return redirect('post:post_list')
+
+@login_required
+def comment_new(request):
+    pk = request.POST.get('pk')
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return render(request, 'post/comment_new_ajax.html', {
+                'comment': comment,
+            })
+    return redirect("post:post_list")
+
+@login_required
+def comment_del(request):
+    pk = request.POST.get('pk')
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == 'POST' and request.user == comment.author:
+        comment.delete()
+        message = '삭제완료'
+        status = 1
+    else:
+        message = '잘못된 접근입니다.'
+        status = 0
+
+    return HttpResponse(json.dumps({'message': message, 'status': status}), content_type="application/json")
