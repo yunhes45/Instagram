@@ -35,9 +35,24 @@
               </div>
             <div class="sprite_more_icon" data-name="more">
               <ul class="toggle_box">
-                <li><input type="submit" class="follow" value="팔로우" data-name="follow"></li>
-                <li>수정</li>
-                <li>삭제</li>
+                <li>
+                {% if user.profile in post_author.profile.get_follower %}
+                  <input type="submit" class="follow" value="팔로잉" data-name="follow" name="{{ post.author.profile.id }}">
+                {% else %}
+                  <input type="submit" class="follow" value="팔로우" data-name="follow" name="{{ post.author.profile.id }}">
+                {% endif %}
+                </li>
+                {% if post.author == user %}
+                <li>
+                  <a class="post-edit" href="{% url 'post:post_edit' post.pk %}">수정</a>
+                </li>
+                <li>
+                  <form class="post-delete-form" action="{% url 'post:post_delete' post.pk %}" method="post">
+                      {% csrf_token %}
+                      <input type="submit" class="post-delete" value="삭제">                   
+                  </form>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </header>
@@ -101,7 +116,7 @@
             {% else %}
             {{ comment_form }}
             <input type="text" placeholder="댓글달기...">
-            <div class="upload_btn m_text" name="{{ post.id }}" data-name="comment" onclick="alert('댓글을 작성하려면 로그인이 필요합니다.)">게시</div>
+            <div class="upload_btn m_text" name="{{ post.id }}" data-name="comment" onclick="alert('댓글을 작성하려면 로그인이 필요합니다.')">게시</div>
             {% endif %}
           </div>
 
