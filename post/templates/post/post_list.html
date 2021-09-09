@@ -115,6 +115,8 @@
             <span id="bookmark-count-{{ post.id }}">북마크{{ post.bookmark_count }}개</span>
           </div>
 
+          <div class="content">{{ post.content }}</div>
+
           <div class="comment_container">
             <div class="comment" id="comment-list-ajax-post{{ post.id }}">
               {% for comment in post.comment_set.all %}
@@ -148,9 +150,10 @@
 
         </article>
         {% endfor %}
+        <div id="post_list_ajax"></div>
+        <input type="hidden" id="page" value="2">
+      
       </div>
-
-      <input type="hidden" id="page" value="0">
 
       <div class="side_box">
         <div class="user_profile">
