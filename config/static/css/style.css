@@ -404,6 +404,7 @@ body {
   width: 293px;
   position: absolute;
   top: 0;
+  right: 0;
 }
 
 .side_box.on {
