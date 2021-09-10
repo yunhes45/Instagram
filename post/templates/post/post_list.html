@@ -202,8 +202,9 @@
           <div>회원님을 위한 추천</div>
           <div class="more">모두 보기</div>
         </header>
-        {% for post in posts|slice:"0:2" %}
+
         <div class="scroll_inner">
+          {% for post in posts|slice:"0:2" %}
           <div class="thumb_user">
             <div class="profile_thumb">
               <img src="{{ post.photo.url }}" alt="프로필사진">
@@ -213,8 +214,8 @@
               <div class="time">{{ post.updated_at|timesince }}</div>
             </div>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </article>
     </div>
 
