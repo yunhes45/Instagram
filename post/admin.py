@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Like, BookMark, Comment
+from .models import Post, Like, BookMark, Comment, Tag
 from django import forms
 
 # Register your models here.
@@ -42,3 +42,7 @@ class BookmardkAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['post', 'content', 'author', 'created_at']
     list_display_links = ['post', 'content', 'author']
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ['name']
