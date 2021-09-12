@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import get_user_model
-from .models import Post, Like, Comment
+from .models import Post, Like, Comment, Tag
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm, CommentForm
 from django.contrib import messages
@@ -8,11 +8,28 @@ from django.views.decorators.http import require_POST
 import json
 from django.http import HttpResponse
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Count
 
 # Create your views here.
 
-def post_list(request):
-    post_list = Post.objects.all()
+def post_list(request, tag=None):
+
+    #tag
+    tag_all = Tag.objects.annotate(num_post=Count('post')).order_by('-num_post')
+
+    # 쿼리개선
+    # post_list = Post.objects.all()
+
+    if tag:
+        post_list = Post.objects.filter(tag_set__name__iexact=tag) \
+            .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 
+                          'author__profile__follower_user', 'author__profile__follower_user__from_user') \
+            .select_related('author__profile')
+    else:
+        post_list = Post.objects.all() \
+            .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 
+                          'author__profile__follower_user', 'author__profile__follower_user__from_user') \
+            .select_related('author__profile')        
 
     paginator = Paginator(post_list, 3)
     page_num = request.POST.get('page')
@@ -31,6 +48,11 @@ def post_list(request):
                                  {'posts': posts, 
                                   'comment_form': comment_form,
                                  })    
+    
+    if request.method == 'POST':
+        tag = request.POST.get('tag')
+        tag_clean = ''.join(e for e in tag if e.isalnum())
+        return redirect('post:post_search', tag_clean)
 
     if request.user.is_authenticated:
         username = request.user
@@ -43,6 +65,8 @@ def post_list(request):
 
         return render(request, 'post/post_list.html', {
             'user_profile': user_profile,
+            'tag': tag,
+            'tag_all': tag,
             'posts': posts,
             'comment_form': comment_form,
             'following_post_list': following_post_list,
@@ -51,6 +75,8 @@ def post_list(request):
         return render(request, 'post/post_list.html', {
             'posts': posts,
             'comment_form': comment_form,
+            'tag': tag,
+            'tag_all': tag_all,
         })
 
 @login_required
@@ -96,7 +122,7 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            # post.tag_save()
+            post.tag_save()
             messages.info(request, '새 글이 등록되었습니다.')
             return redirect('post:post_list')
     else:
