@@ -12,6 +12,16 @@ from django.db.models import Count
 
 # Create your views here.
 
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    comment_form = CommentForm()
+
+    return render(request, 'post/post_detail.html', 
+                         {'post': post, 
+                          'comment_form': comment_form,
+                         })
+
+
 def post_list(request, tag=None):
 
     #tag
@@ -19,7 +29,6 @@ def post_list(request, tag=None):
 
     # 쿼리개선
     # post_list = Post.objects.all()
-
     if tag:
         post_list = Post.objects.filter(tag_set__name__iexact=tag) \
             .prefetch_related('tag_set', 'like_user_set__profile', 'comment_set__author__profile', 
