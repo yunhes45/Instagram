@@ -40,17 +40,24 @@
           </div>
 
           <div class="right_icons">
-            <div class="sprite_camera_icon"><a href="{% url 'post:post_list' %}"></a></div>
+            <a href="{% url 'post:post_new' %}"><div class="sprite_camera_icon"></div></a>
             <div class="sprite_compass_icon"><a href="#"></a></div>
             <div class="sprite_heart_icon_outline"><a href="#"></a></div>
-            <div class="sprite_user_icon_outline"><a href="#"></a></div>
+            {% if user.is_authenticated %}
+            <a href="{% url 'post:my_post_list' user.username %}"><div class="sprite_user_icon_outline"></div></a>
+            {% else %}
+            <a href="{% url 'accounts:login' %}"><div class="sprite_user_icon_outline"></div></a>
+            {% endif %}
           </div>
       </section>
     </header>
 
     {% block content %}
     {% endblock %}
-
     </section>
+
+    {% block js %}
+    {% endblock %}
+
 </body>
 </html>
