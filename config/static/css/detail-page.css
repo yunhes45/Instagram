@@ -81,17 +81,33 @@
     display: block;
     transform:scale(1);
 
-
 }
 
 .top .more_detail > li{
     padding: 10px 20px;
-    cursor: pointer;
+    text-align: center;
 }
 
 .top .more_detail > li:hover{
-    background:gray;
+    /* background:gray; */
 }
+
+.top .more_detail > li input {
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
+    background-color: white;
+}
+
+.top .more_detail > li input:hover {
+    /* background-color: gray; */
+}
+
+.top .more_detail > li .post-edit {
+    text-decoration: none;
+    color: inherit;
+}
+
 .user_container .country{
     font-size: 12px;
 }

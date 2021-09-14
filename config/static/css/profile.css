@@ -25,10 +25,10 @@
 
 
 .detail{
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 .detail .top{
     display: flex;
