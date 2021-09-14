@@ -78,7 +78,7 @@
 }
 
 .sprite_more_icon.on .more_detail{
-    /*display: block;*/
+    display: block;
     transform:scale(1);
 
 
