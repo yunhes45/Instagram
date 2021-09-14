@@ -430,6 +430,7 @@ body {
   align-items: center;
   font-size: 14px;
   color: #262626;
+  margin-bottom: 5%;
 }
 
 .side_box .detail .id {
@@ -542,6 +543,14 @@ body {
 .hidden_menu .thumb_img img{
     width: 100%;
     height: 100%;
+}
+
+.content {
+  font-size: 100%;
+  display: inline-block;
+  padding-right: 25px;
+  margin-top: 10px;
+  padding: 10px 20px;
 }
 
 /* 반응형 */
