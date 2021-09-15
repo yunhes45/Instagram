@@ -11,38 +11,34 @@
           {% endif %}
         </div>
         <div class="user_name">
-          <div class="nick_name m_text">{{ post.author.profile.nickname }}  {{ post.id }}</div>
+          <div class="nick_name m_text">{{ post.author.profile.nickname }}</div>
           <div class="country s_text">Seoul, South Korea</div>
         </div>
         <div>
-          <form action="{% url 'post:post_delete' post.pk %}" method="POST">
-            {% csrf_token %}
-            <input type="submit" class="post-delete" value="삭제">
-          </form>
         </div>  
       </div>
-    <div class="sprite_more_icon" data-name="more">
-      <ul class="toggle_box">
-        <li>
-        {% if user.profile in post_author.profile.get_follower %}
-          <input type="submit" class="follow" value="팔로잉" data-name="follow" name="{{ post.author.profile.id }}">
-        {% else %}
-          <input type="submit" class="follow" value="팔로우" data-name="follow" name="{{ post.author.profile.id }}">
-        {% endif %}
-        </li>
-        {% if post.author == user %}
-        <li>
-          <a class="post-edit" href="{% url 'post:post_edit' post.pk %}">수정</a>
-        </li>
-        <li>
-          <form class="post-delete-form" action="{% url 'post:post_delete' post.pk %}" method="post">
-              {% csrf_token %}
-              <input type="submit" class="post-delete" value="삭제">                   
-          </form>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
+      <div class="sprite_more_icon" data-name="more">
+        <ul class="toggle_box">
+          <li>
+          {% if user.profile in post.author.profile.get_follower %}
+            <input type="submit" class="follow" value="팔로잉" data-name="follow" name="{{ post.author.profile.id }}">
+          {% else %}
+            <input type="submit" class="follow" value="팔로우" data-name="follow" name="{{ post.author.profile.id }}">
+          {% endif %}
+          </li>
+          {% if post.author == user %}
+          <li>
+            <a class="post-edit" href="{% url 'post:post_edit' post.pk %}">수정</a>
+          </li>
+          <li>
+            <form class="post-delete-form" action="{% url 'post:post_delete' post.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="post-delete" value="삭제">                   
+            </form>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
   </header>
 
   <div class="img_section">
@@ -60,7 +56,7 @@
         <div class="sprite_heart_icon_outline " name="{{ post.id }}" data-name="heartbeat"></div>
         {% endif %}
       </div>
-      <div class="sprite_bubble_icon"></div>
+      <div class="sprite_bubble_icon" onclick="location.href='{% url 'post:post_detail' post.pk %}'"></div>
       <div class="sprite_share_icon"></div>
     </div>
     <div class="right_icons">
