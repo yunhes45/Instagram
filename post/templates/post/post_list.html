@@ -63,7 +63,7 @@
             <div class="sprite_more_icon" data-name="more">
               <ul class="toggle_box">
                 <li>
-                {% if user.profile in post_author.profile.get_follower %}
+                {% if user.profile in post.author.profile.get_follower %}
                   <input type="submit" class="follow" value="팔로잉" data-name="follow" name="{{ post.author.profile.id }}">
                 {% else %}
                   <input type="submit" class="follow" value="팔로우" data-name="follow" name="{{ post.author.profile.id }}">
