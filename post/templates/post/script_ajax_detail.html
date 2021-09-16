@@ -16,28 +16,30 @@
         }
 
         if(elem.matches('[data-name="follow"]')){
-                var pk = elem.getAttribute('name');
-                
-                $.ajax({
-                    type: "POST",
-                    url: "{% url 'accounts:follow' %}",
-                    data: {
-                        'pk': pk,
-                        'csrfmiddlewaretoken': '{{ csrf_token }}',
-                    },
-                    dataType: "json",
-                    success: function(response){
-                        if(response.status){
-                            document.querySelector('input.follow[name=\''+pk+'\']').value="팔로잉";
-                        }else{
-                            document.querySelector('input.follow[name=\''+pk+'\']').value="팔로우";
-                        }
-                    },
-                    error: function(request, status, error){
-                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            var pk = elem.getAttribute('name');
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'accounts:follow' %}",
+                data: {
+                    'pk': pk,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+                },
+                dataType: "json",
+                success: function(response){
+                    if(response.status){
+                        document.querySelector('input.follow[name=\''+pk+'\']').value="팔로잉";
+                    }else{
+                        document.querySelector('input.follow[name=\''+pk+'\']').value="팔로우";
                     }
-                });
-            }else if(elem.matches('[data-name="heartbeat"]')){
+                },
+                error: function(request, status, error){
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                },
+
+            })
+        }else if(elem.matches('[data-name="heartbeat"]')){
             var pk = elem.getAttribute('name');
 
             $.ajax({
