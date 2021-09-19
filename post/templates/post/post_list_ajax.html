@@ -1,4 +1,6 @@
 {% load static %}
+{% load post_extras %}
+
 {% for post in posts %}
 <article class="contents">
   <header class="top">
@@ -72,6 +74,9 @@
     <span id="like-count-{{ post.id }}">좋아요{{ post.like_count }}개</span>
     <span id="bookmark-count-{{ post.id }}">북마크{{ post.bookmark_count }}개</span>
   </div>
+
+  <!-- content -->
+  <div class="content">{{ post | add_link | safe | linebreaksbr }}</div> 
 
   <div class="comment_container">
     <div class="comment" id="comment-list-ajax-post{{ post.id }}">
