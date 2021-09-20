@@ -26,7 +26,7 @@
 
             <div class="detail">
                 <div class="top">
-                    <div class="user_name">{{ user.profile.nickname }}</div>
+                    <div class="user_name">{{ user_profile.nickname }}</div>
                     <a href="{{ profile_edit.html }}" class="profile_edit">프로필편집</a>
                     <a href="{% url 'accounts:logout' %}" class="logout">로그아웃</a>
                 </div>
@@ -34,15 +34,15 @@
                 <ul class="middle">
                     <li>
                         <span>게시물</span>
-                        {{ user.post_set.count }}
+                        {{ post_list.count }}
                     </li>
                     <li>
                         <span>팔로워</span>
-                        {{ user.profile.follower_count }}
+                        {{ user_profile.follower_count }}
                     </li>
                     <li>
                         <span>팔로우</span>
-                        {{ user.profile.following_count }}
+                        {{ user_profile.following_count }}
                     </li>
                 </ul>
                 <p class="about">
@@ -66,7 +66,7 @@
             {% for post in all_post_list %}
                 {% for bookmark_user in post.bookmark_user_set.all %}
                     <div class="pic">
-                        {% if user == bookmark_user.profile.user %}
+                        {% if user_profile.user == bookmark_user.profile.user %}
                             <a href="{% url 'post:post_detail' post.pk %}"><img src="{{ post.photo.url }}" alt=""></a>
                         {% endif %}
                     </div>

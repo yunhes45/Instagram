@@ -188,7 +188,7 @@
               <img src="{{ post.photo.url }}" alt="프로필사진">
             </div>
             <div class="detail">
-              <div class="id">{{ post.content }}</div>
+              <div class="id" onclick="location.href='{% url 'post:post_detail' post.pk %}'">{{ post.content }}</div>
               <div class="time">{{ post.updated_at|timesince }}</div>
             </div>
           </div>
@@ -207,11 +207,16 @@
           {% for post in posts|slice:"0:2" %}
           <div class="thumb_user">
             <div class="profile_thumb">
-              <img src="{{ post.photo.url }}" alt="프로필사진">
+              <img src="{{ post.author.profile.picture.url }}" alt="프로필사진">
             </div>
             <div class="detail">
-              <div class="id">{{ post.content }}</div>
+              <div class="id" onclick="location.href='{% url 'post:my_post_list' post.author.profile.nickname %}'">{{ post.author.profile.nickname }}</div>
               <div class="time">{{ post.updated_at|timesince }}</div>
+              <!-- {% if user.is_authenticated %}
+              <a href="{% url 'post:my_post_list' user.username %}"><div class="sprite_user_icon_outline"></div></a>
+              {% else %}
+              <a href="{% url 'accounts:login' %}"><div class="sprite_user_icon_outline"></div></a>
+              {% endif %} -->
             </div>
           </div>
           {% endfor %}
