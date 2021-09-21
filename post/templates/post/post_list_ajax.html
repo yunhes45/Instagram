@@ -100,12 +100,10 @@
   <div class="comment_field" id="add-comment-post{{ post.id }}">
     {% if user.is_authenticated %}
     {{ comment_form }}
-    <input type="text" placeholder="댓글달기...">
     <div class="upload_btn m_text" name="{{ post.id }}" data-name="comment">게시</div>
     {% else %}
     {{ comment_form }}
-    <input type="text" placeholder="댓글달기...">
-    <div class="upload_btn m_text" name="{{ post.id }}" data-name="comment" onclick="alert('댓글을 작성하려면 로그인이 필요합니다.')">게시</div>
+    <div class="upload_btn m_text" name="{{ post.id }}" data-name="comment_noauth" onclick="alert('댓글을 작성하려면 로그인이 필요합니다.')">게시</div>
     {% endif %}
   </div>
 
