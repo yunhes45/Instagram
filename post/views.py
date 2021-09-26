@@ -21,6 +21,13 @@ def post_detail(request, pk):
                           'comment_form': comment_form,
                          })
 
+def user_search(request):
+    if request.method == 'POST':
+        u_search = request.POST.get('search_field')
+        print(u_search)
+
+    return redirect('post:my_post_list', u_search)
+
 def my_post_list(request, username):
     user = get_object_or_404(get_user_model(), username=username)
     user_profile = user.profile

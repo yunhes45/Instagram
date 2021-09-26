@@ -28,14 +28,17 @@
             </a>
           </h1>
 
-          <div class="search_box">
-            <input type="text" placeholder="검색" id="search_field">
+          <form method="POST" action="{% url 'post:user_search' %}">
+              {% csrf_token %}
+              <div class="search_box">
+                <input type="text" placeholder="검색" id="search_field" name="search_field">
 
-            <div class="fake_field">
-              <span class="sprite_small_search_icon"></span>
-              <span>검색</span>
-            </div>
-          </div>
+                <div class="fake_field">
+                  <button type="submit" class="sprite_small_search_icon"></button>
+                  <span>검색</span>
+                </div>
+              </div>
+          </form>
 
           <div class="right_icons">
             <a href="{% url 'post:post_new' %}"><div class="sprite_camera_icon"></div></a>
