@@ -28,13 +28,13 @@
             </a>
           </h1>
 
-          <form method="POST" action="{% url 'post:user_search' %}">
+          <form method="POST" action="{% url 'post:search_box' %}">
               {% csrf_token %}
               <div class="search_box">
                 <input type="text" placeholder="검색" id="search_field" name="search_field">
 
                 <div class="fake_field">
-                  <button type="submit" class="sprite_small_search_icon"></button>
+                  <span type="submit" class="sprite_small_search_icon"></span>
                   <span>검색</span>
                 </div>
               </div>

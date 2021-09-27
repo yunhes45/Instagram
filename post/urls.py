@@ -17,6 +17,6 @@ urlpatterns = [
     path('<int:pk>/', post_detail, name='post_detail'),
 
     path('<username>/list/detail', my_post_list, name='my_post_list'),
-    path('user_search', user_search, name='user_search'),
+    path('search_box', search_box, name='search_box'),
 
 ]
