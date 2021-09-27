@@ -18,7 +18,6 @@ window.addEventListener("DOMContentLoaded", function(){
     }
 
     if(elem.matches('[data-name="heartbeat"]')){
-      console.log("하트");
 
       var pk = elem.getAttribute('name');
 
@@ -43,8 +42,6 @@ window.addEventListener("DOMContentLoaded", function(){
 
     } else if (elem.matches('[data-name="bookmark"]')) {
 
-        console.log('북마크!');
-
         var pk = elem.getAttribute('name');
 
         $.ajax({
@@ -68,13 +65,8 @@ window.addEventListener("DOMContentLoaded", function(){
         });
     } else if (elem.matches('[data-name="comment"]')) {
 
-        console.log('댓글!');
-
         var content = document.querySelector('#add-comment-post37>input[type=text]').value;
         //.contents .comment_field .upload_btn 속성 pointer-event 끄기
-
-
-        console.log(content);
 
         if (content.length > 140) {
             alert("댓글은 최대 140자 입력 가능합니다. 현재 글자수 :" + content.length);
@@ -100,8 +92,6 @@ window.addEventListener("DOMContentLoaded", function(){
 
         document.querySelector('#add-comment-post37>input[type=text]').value = '';
     } else if (elem.matches('[data-name="comment_delete"]')) {
-
-        console.log('삭제!');
 
         $.ajax({
             type: "POST",

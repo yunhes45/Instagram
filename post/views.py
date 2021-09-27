@@ -24,10 +24,8 @@ def post_detail(request, pk):
 def search_box(request):
     if request.method == 'POST':
         search_box = request.POST.get('search_field')
-        print(search_box)
 
         if search_box.startswith('#'):
-            print(search_box)
             return redirect('post:post_search', search_box[1:])
         else:
             return redirect('post:my_post_list', search_box)
